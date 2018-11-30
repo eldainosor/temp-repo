@@ -14,7 +14,7 @@
 
     <!-- Categories -->
     <string name="animations_title">Animations</string>
-    <string name="animations_settings_summary">Make your system transitions more awesome or horrible.</string>
+    <string name="animations_settings_summary">Make your system transitions more awesome or horrible</string>
 
     <string name="button_title">HW Buttons</string>
     <string name="buttons_settings_summary">Change things of your HW buttons</string>
@@ -58,9 +58,9 @@
     <!-- DUMPSTER - About Section strings -->
     <string name="bootleg_pref_title_about_us">About us</string>
     <string name="bootleg_ab_title_whoami">What\'s Bootleggers?</string>
-    <string name="bootleg_ab_summary_whoami">Bootleggers is a ROM packed with features and apps with the purpose of make your feel like 家. Hope you like it and enjoy our experience.</string>
+    <string name="bootleg_ab_summary_whoami">Bootleggers is a ROM packed with features and apps with the purpose of making you feel like 家. Hope you like it and enjoy our experience.</string>
     <string name="bootleg_ab_title_thankssec">Thank you list</string>
-    <string name="bootleg_ab_summary_thankssec">Touch here to see who made and inspired this project. Also, huge thanks to %s for bring it for %s.</string>
+    <string name="bootleg_ab_summary_thankssec">Touch here to see who made and inspired this project. Also, huge thanks to %s for bringing it to %s.</string>
     <string name="bootleg_ab_summary_thanksclean">Touch here to see who made and inspired this project.</string>
     <string name="bootleg_pref_title_romextras">Extras and Addons</string>
     <string name="bootleg_ex_title_featurelist">Feature List</string>
@@ -125,7 +125,7 @@
     <string name="save">Save</string>
 
     <!-- Footer alerts -->
-    <string name="animations_transparent_alert">Some (or maybe all) of this animations may not work if your device got a transparent theme!</string>
+    <string name="animations_transparent_alert">Some (or maybe all) of these animations may not work if you are using a transparent theme!</string>
 
     <!-- Color Picker -->
     <string name="dialog_color_picker">Color Picker</string>
@@ -188,7 +188,7 @@
     <string name="volbtn_up_zen_title">Volume up in do not disturb</string>
     <string name="volbtn_up_zen_summary">allow volume up to exit do not disturb mode</string>
     <string name="vol_zen_title">Do not disturb switch</string>
-    <string name="vol_zen_summary">Show do not disturb swith on volume panel</string>
+    <string name="vol_zen_summary">Show do not disturb switch on volume panel</string>
 
     <!-- Toast app icon -->
     <string name="toast_icon_title">Toast app icon</string>
