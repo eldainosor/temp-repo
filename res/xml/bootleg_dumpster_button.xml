@@ -220,6 +220,12 @@
             android:summary="@string/vol_zen_summary"
             android:defaultValue="false"/>
 
+         <com.bootleggers.dumpster.preferences.SystemSettingSwitchPreference
+            android:key="torch_long_press_power_gesture"
+            android:title="@string/torch_long_press_power_gesture"
+            android:summary="@string/torch_long_press_power_gesture_summary"
+            android:defaultValue="false"/>
+
     </PreferenceCategory>
 
 </PreferenceScreen>

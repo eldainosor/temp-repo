@@ -32,6 +32,7 @@ import android.support.v7.preference.Preference.OnPreferenceChangeListener;
 import android.support.v14.preference.SwitchPreference;
 import android.provider.Settings;
 
+import com.android.internal.util.bootleggers.BootlegUtils;
 import com.android.settings.R;
 
 import com.android.internal.logging.nano.MetricsProto;
@@ -56,6 +57,9 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
     private static final String CATEGORY_BACK = "back_key";
     private static final String CATEGORY_ASSIST = "assist_key";
     private static final String CATEGORY_APPSWITCH = "app_switch_key";
+
+    // power button gesture
+    private static final String TORCH_POWER_BUTTON_GESTURE = "torch_long_press_power_gesture";
 
     // Masks for checking presence of hardware keys.
     // Must match values in frameworks/base/core/res/res/values/config.xml
@@ -182,6 +186,14 @@ public class ButtonSettings extends ActionFragment implements OnPreferenceChange
         // search/assist key
         if (!hasAssistKey) {
             prefScreen.removePreference(assistCategory);
+        }
+
+        if (!BootlegUtils.deviceSupportsFlashLight(getContext())) {
+            Preference toRemove = prefScreen.findPreference(TORCH_POWER_BUTTON_GESTURE);
+            prefScreen.removePreference(toRemove);
+            if (toRemove != null) {
+                prefScreen.removePreference(toRemove);
+            }
         }
 
         // let super know we can load ActionPreferences
