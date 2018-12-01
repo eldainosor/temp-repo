@@ -52,6 +52,9 @@
     <string name="about_bootleg_title">About Bootleggers</string>
     <string name="about_bootleg_summary">Some info about us, just in case you\'re curious about it</string>
 
+    <!-- Restart SysUI menu title -->
+    <string name="bootleg_sysui_restart_title">Restart SystemUI</string>
+
     <!-- DUMPSTER - About Section strings -->
     <string name="bootleg_pref_title_about_us">About us</string>
     <string name="bootleg_ab_title_whoami">What\'s Bootleggers?</string>

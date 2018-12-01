@@ -137,7 +137,7 @@ public class StatusBarSettings extends SettingsPreferenceFragment implements
     @Override
     public boolean onPreferenceTreeClick(Preference preference) {
         if (preference == mOldMobiletype) {
-            Utils.restartSystemUi(getContext());
+            Utils.restartSystemUiToast(getContext());
             return true;
         }
         return super.onPreferenceTreeClick(preference);

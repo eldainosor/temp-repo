@@ -59,7 +59,7 @@ public class RecentsSettings extends SettingsPreferenceFragment implements
                Settings.Secure.putInt(getActivity().getContentResolver(),
                     Settings.Secure.SWIPE_UP_TO_SWITCH_APPS_ENABLED, 0);
             }
-            Utils.restartSystemUi(getContext());
+            Utils.restartSystemUiToast(getContext());
         return true;
         }
     return false;

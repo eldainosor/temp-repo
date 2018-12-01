@@ -311,27 +311,29 @@ public final class Utils {
     }
 
     public static void restartSystemUi(Context context) {
-        Toast.makeText(context, R.string.systemui_restart_toast, Toast.LENGTH_LONG).show();
-        new RestartSystemUiTask(context).execute();
+        new RestartSystemUiTask(context, 0).execute();
     }
 
-    public static void showSystemUiRestartDialog(Context context) {
-        restartSystemUi(context);
+    public static void restartSystemUiToast(Context context) {
+        Toast.makeText(context, R.string.systemui_restart_toast, Toast.LENGTH_LONG).show();
+        new RestartSystemUiTask(context, 3000).execute();
     }
 
     private static class RestartSystemUiTask extends AsyncTask<Void, Void, Void> {
         private Context mContext;
+        private int mSleep;
 
-        public RestartSystemUiTask(Context context) {
+        public RestartSystemUiTask(Context context, int sleep) {
             super();
             mContext = context;
+            mSleep = sleep;
         }
 
         @Override
         protected Void doInBackground(Void... params) {
-        	try {
-        	     Thread.sleep(3000); //3s
-        	} catch (InterruptedException ie) {}
+            try {
+                Thread.sleep(mSleep);
+            } catch (InterruptedException ie) {}
 
             try {
                 ActivityManager am =

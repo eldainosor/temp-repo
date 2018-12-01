@@ -23,13 +23,19 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.preference.Preference;
 import com.android.settings.R;
 
 import com.android.settings.SettingsPreferenceFragment;
+import com.bootleggers.dumpster.extra.Utils;
 
 public class MainDump extends SettingsPreferenceFragment {
+
+    private static final int MENU_RESTART = 0;
 
     @Override
     public void onCreate(Bundle icicle) {
@@ -41,6 +47,22 @@ public class MainDump extends SettingsPreferenceFragment {
     @Override
     public int getMetricsCategory() {
         return MetricsProto.MetricsEvent.BOOTLEG;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        menu.add(0, MENU_RESTART, 0, R.string.bootleg_sysui_restart_title);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case MENU_RESTART:
+                Utils.restartSystemUi(getContext());
+                return true;
+            default:
+                return false;
+        }
     }
 
     public static void lockCurrentOrientation(Activity activity) {
