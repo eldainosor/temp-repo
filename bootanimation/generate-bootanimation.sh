@@ -9,29 +9,14 @@ HALF_RES="$3"
 BOOTNUM="$4"
 OUT="$ANDROID_PRODUCT_OUT/obj/BOOTANIMATIONS/$BOOTNUM"
 
-rm -rf $OUT
-mkdir -p $OUT
-
-# unset BOOTNUM if = 0
-if [[ $BOOTNUM = 0 ]]; then
-    unset BOOTNUM
+# remove OUT if it already exists
+if [[ -d $OUT ]]; then
+    rm -rf $OUT
 fi
-
-# Randomly pick bootanimation, but make sure we don't pick same one multiple times.
-RANDOM_BOOT=$(shuf -i 0-9 -n 1)
-RANDOM_BOOT=9   #TEMP/DNM: make sure one of the bootanimations are bootanim #9
-BOOTANIM_NUMS="$OUT/../.bootanimation_numbers"
-if [[ -f $BOOTANIM_NUMS ]]; then
-    until ! cat $BOOTANIM_NUMS | grep $RANDOM_BOOT &>/dev/null; do
-        RANDOM_BOOT=$(shuf -i 0-9 -n 1)
-    done
-fi
-touch $BOOTANIM_NUMS
-echo $RANDOM_BOOT >> $BOOTANIM_NUMS
-echo "Info: bootanimation was chosen randomly. The chosen one is the number $RANDOM_BOOT"
+mkdir -p "$OUT/bootanimation"
 
 #####
-# This is the main AICP code except adjusted to generate x bootanimations, randomly picked.
+# This is the main AICP code except adjusted to generate 3 bootanimations.
 #
 # By now the current designs to declare are:
 #   0: Classic bootanimation
@@ -46,6 +31,16 @@ echo "Info: bootanimation was chosen randomly. The chosen one is the number $RAN
 #   9: Moelle's Smoke Pulse: The one that got shared everywhere, that ends on a smokey background.
 #
 #####
+RANDOM_BOOT=$(shuf -i 0-9 -n 1)
+BOOTANIM_NUMS="$OUT/../.bootanimation_numbers"
+if [[ -f $BOOTANIM_NUMS ]]; then
+    until ! cat $BOOTANIM_NUMS | grep $RANDOM_BOOT &>/dev/null; do
+        RANDOM_BOOT=$(shuf -i 0-9 -n 1)
+    done
+fi
+touch $BOOTANIM_NUMS
+echo $RANDOM_BOOT >> $BOOTANIM_NUMS
+echo "Info: bootanimation was chosen randomly. The chosen one is the number $RANDOM_BOOT"
 
 case "$RANDOM_BOOT" in
     [0-1])

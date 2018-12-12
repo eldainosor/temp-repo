@@ -42,34 +42,25 @@ define build-bootanimation
     $(TARGET_BOOTANIMATION_BUILDNUMBER)
 endef
 
-TARGET_GENERATED_BOOTANIMATION := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/0/bootanimation.zip
 TARGET_GENERATED_BOOTANIMATION1 := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/1/bootanimation1.zip
 TARGET_GENERATED_BOOTANIMATION2 := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/2/bootanimation2.zip
 TARGET_GENERATED_BOOTANIMATION3 := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/3/bootanimation3.zip
 
-$(TARGET_GENERATED_BOOTANIMATION):
-	@echo "Building bootanimation, not using random bootanimations."
-	$(eval TARGET_BOOTANIMATION_BUILDNUMBER := 0)
-	$(build-bootanimation)
-
 $(TARGET_GENERATED_BOOTANIMATION1):
-	@echo "Building first bootanimation"
+	@echo "Building bootanimation 1"
 	$(eval TARGET_BOOTANIMATION_BUILDNUMBER := 1)
 	$(build-bootanimation)
 
 $(TARGET_GENERATED_BOOTANIMATION2):
-	@echo "Building second bootanimation"
+	@echo "Building bootanimation 2"
 	$(eval TARGET_BOOTANIMATION_BUILDNUMBER := 2)
 	$(build-bootanimation)
 
 $(TARGET_GENERATED_BOOTANIMATION3):
-	@echo "Building third bootanimation"
+	@echo "Building bootanimation 3"
 	$(eval TARGET_BOOTANIMATION_BUILDNUMBER := 3)
 	$(build-bootanimation)
 
-ifeq ($(TARGET_BOOTANIMATION),)
-    TARGET_BOOTANIMATION := $(TARGET_GENERATED_BOOTANIMATION)
-endif
 ifeq ($(TARGET_BOOTANIMATION1),)
     TARGET_BOOTANIMATION1 := $(TARGET_GENERATED_BOOTANIMATION1)
 endif
@@ -90,16 +81,6 @@ ifeq ($(shell command -v convert),)
     $(info **********************************************)
     $(error stop)
 endif
-
-include $(CLEAR_VARS)
-LOCAL_MODULE := bootanimation.zip
-LOCAL_MODULE_CLASS := ETC
-LOCAL_MODULE_PATH := $(TARGET_OUT)/media
-include $(BUILD_SYSTEM)/base_rules.mk
-
-$(LOCAL_BUILT_MODULE): $(TARGET_BOOTANIMATION)
-	@mkdir -p $(dir $@)
-	@cp $(TARGET_BOOTANIMATION) $@
 
 include $(CLEAR_VARS)
 LOCAL_MODULE := bootanimation1.zip
