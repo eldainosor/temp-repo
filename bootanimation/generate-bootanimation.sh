@@ -53,15 +53,15 @@ echo "Info: bootanimation was chosen randomly. The chosen one is the number $RAN
 
 else
 
-if [ -z "$BOOTPICK" ]; then
+if [ -z "$BOOTNUM" ]; then
     RANDOM_BOOT=$(shuf -i 0-9 -n 1)
     echo "Info: bootanimation was chosen randomly. The chosen one is the number $RANDOM_BOOT"
 else
-    if [ $BOOTPICK -lt -1 ] || [ $BOOTPICK -gt 9 ]; then
+    if [ $BOOTNUM -lt -1 ] || [ $BOOTNUM -gt 9 ]; then
         echo "ERROR: The declared value isn't on the bootanimation list bounds. Please refer to generate-bootanimation.sh to see the values"
         exit 1
     else
-        RANDOM_BOOT="$BOOTPICK"
+        RANDOM_BOOT="$BOOTNUM"
         echo "Info: bootanimation was chosen manually. The chosen one is the number $RANDOM_BOOT"
     fi
 fi
