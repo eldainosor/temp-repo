@@ -12,15 +12,15 @@ PRODUCT_PACKAGES += \
     MusicPlayer \
     WeatherClient
 
-ifeq ($(BOOTLEGGERS_SINGLE_BOOTANIMATION),)
-    PRODUCT_PACKAGES += \
-        bootanimation1.zip \
-        bootanimation2.zip \
-        bootanimation3.zip
-else
-    PRODUCT_PACKAGES += \
-        bootanimation.zip
-endif
+#ifeq ($(BOOTLEGGERS_SINGLE_BOOTANIMATION),)
+#    PRODUCT_PACKAGES += \
+#        bootanimation1.zip \
+#        bootanimation2.zip \
+#        bootanimation3.zip
+#else
+PRODUCT_PACKAGES += \
+    bootanimation.zip
+#endif
 
 # Launcher Selection just in case
 # Please, prepare for reports

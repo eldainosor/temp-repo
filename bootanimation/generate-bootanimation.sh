@@ -19,6 +19,7 @@ fi
 
 # Randomly pick bootanimation, but make sure we don't pick same one multiple times.
 RANDOM_BOOT=$(shuf -i 0-9 -n 1)
+RANDOM_BOOT=9   #TEMP/DNM: make sure one of the bootanimations are bootanim #9
 BOOTANIM_NUMS="$OUT/../.bootanimation_numbers"
 if [[ -f $BOOTANIM_NUMS ]]; then
     until ! cat $BOOTANIM_NUMS | grep $RANDOM_BOOT &>/dev/null; do
