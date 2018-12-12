@@ -6,7 +6,8 @@
 WIDTH="$1"
 HEIGHT="$2"
 HALF_RES="$3"
-BOOTNUM="$4"
+SINGLE_BOOT="$4"
+BOOTNUM="$5"
 OUT="$ANDROID_PRODUCT_OUT/obj/BOOTANIMATIONS/$BOOTNUM"
 
 # remove OUT if it already exists
@@ -31,6 +32,7 @@ mkdir -p "$OUT/bootanimation"
 #   9: Moelle's Smoke Pulse: The one that got shared everywhere, that ends on a smokey background.
 #
 #####
+
 RANDOM_BOOT=$(shuf -i 0-9 -n 1)
 BOOTANIM_NUMS="$OUT/../.bootanimation_numbers"
 if [[ -f $BOOTANIM_NUMS ]]; then

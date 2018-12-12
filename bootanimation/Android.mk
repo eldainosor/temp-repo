@@ -34,14 +34,21 @@ ifeq ($(TARGET_BOOTANIMATION_HALF_RES),)
     TARGET_BOOTANIMATION_HALF_RES := false
 endif
 
+ifeq ($(TARGET_BOOTANIMATION_SINGLE_BOOT),)
+    TARGET_BOOTANIMATION_SINGLE_BOOT := false
+endif
+
 define build-bootanimation
     ./vendor/bootleggers/bootanimation/generate-bootanimation.sh \
     $(TARGET_SCREEN_WIDTH) \
     $(TARGET_SCREEN_HEIGHT) \
     $(TARGET_BOOTANIMATION_HALF_RES) \
+    $(TARGET_BOOTANIMATION_SINGLE_BOOT) \
     $(TARGET_BOOTANIMATION_BUILDNUMBER)
 endef
 
+
+ifeq ($(TARGET_BOOTANIMATION_SINGLE_BOOT),false)
 TARGET_GENERATED_BOOTANIMATION1 := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/1/bootanimation1.zip
 TARGET_GENERATED_BOOTANIMATION2 := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/2/bootanimation2.zip
 TARGET_GENERATED_BOOTANIMATION3 := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATIONS/3/bootanimation3.zip
@@ -70,6 +77,7 @@ endif
 ifeq ($(TARGET_BOOTANIMATION3),)
     TARGET_BOOTANIMATION3 := $(TARGET_GENERATED_BOOTANIMATION3)
 endif
+endif
 
 ifeq ($(shell command -v convert),)
     $(info **********************************************)
@@ -82,6 +90,7 @@ ifeq ($(shell command -v convert),)
     $(error stop)
 endif
 
+ifeq ($(TARGET_BOOTANIMATION_SINGLE_BOOT),false)
 include $(CLEAR_VARS)
 LOCAL_MODULE := bootanimation1.zip
 LOCAL_MODULE_CLASS := ETC
@@ -111,3 +120,5 @@ include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(TARGET_BOOTANIMATION3)
 	@mkdir -p $(dir $@)
 	@cp $(TARGET_BOOTANIMATION3) $@
+
+endif
