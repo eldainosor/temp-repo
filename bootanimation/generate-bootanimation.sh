@@ -8,7 +8,12 @@ HEIGHT="$2"
 HALF_RES="$3"
 SINGLE_BOOT="$4"
 BOOTNUM="$5"
+
+if [ "$SINGLE_BOOT" = "false" ]; then
 OUT="$ANDROID_PRODUCT_OUT/obj/BOOTANIMATIONS/$BOOTNUM"
+else
+OUT="$ANDROID_PRODUCT_OUT/obj/BOOTANIMATION/"
+fi
 
 # remove OUT if it already exists
 if [[ -d $OUT ]]; then
@@ -33,6 +38,8 @@ mkdir -p "$OUT/bootanimation"
 #
 #####
 
+if [ "$SINGLE_BOOT" = "false" ]; then
+
 RANDOM_BOOT=$(shuf -i 0-9 -n 1)
 BOOTANIM_NUMS="$OUT/../.bootanimation_numbers"
 if [[ -f $BOOTANIM_NUMS ]]; then
@@ -43,6 +50,23 @@ fi
 touch $BOOTANIM_NUMS
 echo $RANDOM_BOOT >> $BOOTANIM_NUMS
 echo "Info: bootanimation was chosen randomly. The chosen one is the number $RANDOM_BOOT"
+
+else
+
+if [ -z "$BOOTPICK" ]; then
+    RANDOM_BOOT=$(shuf -i 0-9 -n 1)
+    echo "Info: bootanimation was chosen randomly. The chosen one is the number $RANDOM_BOOT"
+else
+    if [ $BOOTPICK -lt -1 ] || [ $BOOTPICK -gt 9 ]; then
+        echo "ERROR: The declared value isn't on the bootanimation list bounds. Please refer to generate-bootanimation.sh to see the values"
+        exit 1
+    else
+        RANDOM_BOOT="$BOOTPICK"
+        echo "Info: bootanimation was chosen manually. The chosen one is the number $RANDOM_BOOT"
+    fi
+fi
+
+fi
 
 case "$RANDOM_BOOT" in
     [0-1])
@@ -120,4 +144,8 @@ cat "vendor/bootleggers/bootanimation/desc.txt" >> "$OUT/bootanimation/desc.txt"
 # Create bootanimation.zip
 cd "$OUT/bootanimation"
 
+if [ "$SINGLE_BOOT" = "false" ]; then
 zip -qr0 "$OUT/bootanimation$BOOTNUM.zip" .
+else
+zip -qr0 "$OUT/bootanimation.zip" .
+fi

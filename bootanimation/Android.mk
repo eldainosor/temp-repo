@@ -77,6 +77,16 @@ endif
 ifeq ($(TARGET_BOOTANIMATION3),)
     TARGET_BOOTANIMATION3 := $(TARGET_GENERATED_BOOTANIMATION3)
 endif
+else
+TARGET_GENERATED_BOOTANIMATION := $(TARGET_OUT_INTERMEDIATES)/BOOTANIMATION/bootanimation.zip
+$(TARGET_GENERATED_BOOTANIMATION):
+	@echo "Building bootanimation"
+	$(build-bootanimation)
+
+ifeq ($(TARGET_BOOTANIMATION),)
+    TARGET_BOOTANIMATION := $(TARGET_GENERATED_BOOTANIMATION)
+endif
+
 endif
 
 ifeq ($(shell command -v convert),)
@@ -120,5 +130,15 @@ include $(BUILD_SYSTEM)/base_rules.mk
 $(LOCAL_BUILT_MODULE): $(TARGET_BOOTANIMATION3)
 	@mkdir -p $(dir $@)
 	@cp $(TARGET_BOOTANIMATION3) $@
+else 
+include $(CLEAR_VARS)
+LOCAL_MODULE := bootanimation.zip
+LOCAL_MODULE_CLASS := ETC
+LOCAL_MODULE_PATH := $(TARGET_OUT)/media
+include $(BUILD_SYSTEM)/base_rules.mk
+
+$(LOCAL_BUILT_MODULE): $(TARGET_BOOTANIMATION)
+	@mkdir -p $(dir $@)
+	@cp $(TARGET_BOOTANIMATION) $@
 
 endif
