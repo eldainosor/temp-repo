@@ -10,10 +10,17 @@ PRODUCT_PACKAGES += \
     LatinIME \
     Jelly \
     MusicPlayer \
-    bootanimation1.zip \
-    bootanimation2.zip \
-    bootanimation3.zip \
     WeatherClient
+
+ifeq ($(BOOTLEGGERS_SINGLE_BOOTANIMATION),)
+    PRODUCT_PACKAGES += \
+        bootanimation1.zip \
+        bootanimation2.zip \
+        bootanimation3.zip
+else
+    PRODUCT_PACKAGES += \
+        bootanimation.zip
+endif
 
 # Launcher Selection just in case
 # Please, prepare for reports
